@@ -162,6 +162,13 @@ Vanilla Airsonic can be downloaded from
 
 Please use the [Airsonic documentation](https://airsonic.github.io/docs/) for instructions on running Airsonic. For the most part (currently) Airsonic-CE shares similar running instructions unless stated otherwise. Notable exceptions are available as comments or resolutions in the Issues page (please search).
 
+#### Docker Pull from ghcr.io
+Pulling the Docker image from GitHub Container Registry ghcr.io requires some preparation steps:
+- Create a [GitHub **classic** personal access token](https://github.com/settings/tokens) (PAT) with at least `read:packages` permissions. Remember to store it in a safe place as the token will be displayed only once.
+- If you are using Docker, the daemon will probably run as `root` so you need to store the token as `root` user:
+    - Execute `sudo su` to switch to user `root`
+    - As `root`, execute `docker login ghcr.io` and give the personal access token as password
+
 ### Docker Compose
 
 To evaluate Airsonic in Docker Compose try our compose files in [install/compose](./install/compose) directory. There are two variants: one uses embedded database (HSQLDB), another - external (PostgreSQL). You can run from within directory by command:

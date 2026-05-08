@@ -262,7 +262,21 @@ public final class StringUtil {
         while (elements.size() < 3) {
             elements.add("");
         }
-        return new Locale(elements.get(0), elements.get(1), elements.get(2));
+
+        java.util.Locale.Builder builder = new java.util.Locale.Builder();
+        String lang = elements.get(0);
+        String region = elements.get(1);
+        String variant = elements.get(2);
+        if (lang != null && !lang.isEmpty()) {
+            builder.setLanguage(lang);
+        }
+        if (region != null && !region.isEmpty()) {
+            builder.setRegion(region);
+        }
+        if (variant != null && !variant.isEmpty()) {
+            builder.setVariant(variant);
+        }
+        return builder.build();
     }
 
     /**

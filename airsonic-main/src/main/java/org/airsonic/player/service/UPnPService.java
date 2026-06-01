@@ -23,19 +23,19 @@ package org.airsonic.player.service;
 import org.airsonic.player.service.upnp.ApacheUpnpServiceConfiguration;
 import org.airsonic.player.service.upnp.CustomContentDirectory;
 import org.airsonic.player.service.upnp.MSMediaReceiverRegistrarService;
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.binding.annotations.AnnotationLocalServiceBinder;
-import org.fourthline.cling.model.DefaultServiceManager;
-import org.fourthline.cling.model.meta.*;
-import org.fourthline.cling.model.types.DLNADoc;
-import org.fourthline.cling.model.types.DeviceType;
-import org.fourthline.cling.model.types.UDADeviceType;
-import org.fourthline.cling.model.types.UDN;
-import org.fourthline.cling.support.connectionmanager.ConnectionManagerService;
-import org.fourthline.cling.support.model.ProtocolInfos;
-import org.fourthline.cling.support.model.dlna.DLNAProfiles;
-import org.fourthline.cling.support.model.dlna.DLNAProtocolInfo;
+import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceImpl;
+import org.jupnp.binding.annotations.AnnotationLocalServiceBinder;
+import org.jupnp.model.DefaultServiceManager;
+import org.jupnp.model.meta.*;
+import org.jupnp.model.types.DLNADoc;
+import org.jupnp.model.types.DeviceType;
+import org.jupnp.model.types.UDADeviceType;
+import org.jupnp.model.types.UDN;
+import org.jupnp.support.connectionmanager.ConnectionManagerService;
+import org.jupnp.support.model.ProtocolInfos;
+import org.jupnp.support.model.dlna.DLNAProfiles;
+import org.jupnp.support.model.dlna.DLNAProtocolInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +126,9 @@ public class UPnPService {
 
     private synchronized void createService() {
         upnpService = new UpnpServiceImpl(new ApacheUpnpServiceConfiguration(settingsService.getUPnpPort()));
+
+        // the javadoc says UpnpServiceImpl starts on create but it doesn't
+        upnpService.startup();
 
         // Asynch search for other devices (most importantly UPnP-enabled routers for
         // port-mapping)

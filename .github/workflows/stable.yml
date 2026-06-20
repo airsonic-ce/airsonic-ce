@@ -93,7 +93,7 @@ jobs:
       - run: cp airsonic-main/target/airsonic.war install/docker/target/dependency/airsonic-main.war
       - name: Docker meta
         id: docker-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY_IMAGE }}
           tags: |
@@ -166,7 +166,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Docker meta
         id: docker-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         env:
           RELEASE_TAG: ${{ needs.deploy.outputs.tag }}
         with:
